@@ -1,0 +1,31 @@
+{% extends "index.html" %} 
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}" />
+{% endblock %} 
+
+{% block content %}
+<div class="content">
+    <h1 style="margin-bottom: 40px;">Розклад пар</h1>
+    <div class="table">
+        <div class="header">
+            <div>День</div>
+            <div>Час</div>
+            <div>Предмет</div>
+            <div>Викладач</div>
+            <div>Аудиторія</div>
+        </div>
+        {% for lesson in lessons %}
+        <div class="row">
+            <div>{{ lesson.day_of_week }}</div>
+            <div>{{ lesson.time }}</div>
+            <div>{{ lesson.subject }}</div>
+            <div>{{ lesson.teacher }}</div>
+            <div>{{ lesson.room }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    
+</div>
+{% endblock %}

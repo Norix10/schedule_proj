@@ -1,0 +1,37 @@
+body{
+    box-sizing: content-box;
+}
+
+.content{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}   
+
+.table {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* П'ять стовпців однакової ширини */
+    max-width: 50%;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.header {
+    display: contents; /* Щоб зберегти структуру grid */
+    font-weight: bold;
+    background-color: #f4f4f4;
+    border-bottom: 2px solid #ddd;
+}
+
+.row {
+    display: contents; /* Всі ряди адаптуються до grid */
+    background-color: #fff;
+}
+
+.row:nth-child(even) {
+    background-color: #f9f9f9; /* Альтернативний колір для рядків */
+}
+
