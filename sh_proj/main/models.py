@@ -8,6 +8,7 @@ class Teacher(models.Model):
     def __str__(self):
        return f"{self.first_name} {self.middle_name} {self.last_name}"
 
+
 class Lesson(models.Model):
     day_of_week = models.CharField(max_length=10, choices=[
         ('Monday', 'Понеділок'),
