@@ -8,6 +8,11 @@ class Teacher(models.Model):
     def __str__(self):
        return f"{self.first_name} {self.middle_name} {self.last_name}"
 
+class Room(models.Model):
+    room_name = models.CharField(max_length=100)
+    room_number = models.IntegerField(default=0)
+    def __str__(self):
+       return f"{self.room_name} {self.room_number}"
 
 class Lesson(models.Model):
     day_of_week = models.CharField(max_length=10, choices=[
@@ -21,7 +26,7 @@ class Lesson(models.Model):
     time = models.TimeField()
     subject = models.CharField(max_length=100)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='teach')
-    room = models.CharField(max_length=50)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='teach')
 
     def __str__(self):
         return f"{self.subject} ({self.day_of_week}, {self.time})"
