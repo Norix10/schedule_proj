@@ -1,11 +1,11 @@
-from django.template.defaultfilters import first
 from rest_framework import serializers
 from .models import Lesson
-
 
 class LessonSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField()
     room_s = serializers.SerializerMethodField()
+    day_of_week = serializers.SerializerMethodField()
+
     class Meta:
         model = Lesson
         fields = ("id", "day_of_week", "time", "subject", "room_s", "full_name")
@@ -19,3 +19,8 @@ class LessonSerializer(serializers.ModelSerializer):
         if obj.room:
             return f"{obj.room.room_name} {obj.room.room_number}".strip()
         return ""
+
+    def get_day_of_week(self, obj):
+        if obj.day:
+            return obj.day.get_day_of_week_display()
+        return ""  #
