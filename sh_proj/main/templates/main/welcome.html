@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'main/css/group_style.css' %}" />
+{% endblock %}
+
+{% block content %}
+    <div style="max-width: 70%; display: flex; justify-content: center;" class="cnt container mt-4">
+        <h1 class="text-center mb-4">Групи</h1>
+
+        {% if groups %}
+            <div class="list-group">
+                {% for group in groups %}
+                    <div class="groups_div">
+                        <strong>
+                            <a href="{% url 'group_schedule' group.group_name %}">{{ group.group_name }}</a>
+                        </strong>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center">Групи не знайдені.</p>
+        {% endif %}
+    </div>
+{% endblock %}

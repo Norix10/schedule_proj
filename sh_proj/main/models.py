@@ -1,5 +1,11 @@
 from django.db import models
 
+class Group(models.Model):
+    group_name = models.CharField(max_length=100,  unique=True)
+
+    def __str__(self):
+        return f"{self.group_name}"
+
 class Teacher(models.Model):
     first_name = models.CharField(max_length=100)
     middle_name = models.CharField(max_length=100)
@@ -33,11 +39,12 @@ class Day(models.Model):
         return f"{self.get_day_of_week_display()}"
 
 class Lesson(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='lessons')
     time = models.TimeField()
     subject = models.CharField(max_length=100)
     day = models.ForeignKey(Day, on_delete=models.CASCADE, related_name='lessons', default=1)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='teach')
-    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='teach')
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='room')
 
     def __str__(self):
         return f"{self.subject} ({self.day.get_day_of_week_display()}, {self.time})"

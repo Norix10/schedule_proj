@@ -1,31 +1,31 @@
-{% extends "index.html" %} 
+{% extends "index.html" %}
 {% load static %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}" />
-{% endblock %} 
+{% endblock %}
 
 {% block content %}
-<div class="content">
-    <h1 style="margin-bottom: 40px;">Розклад пар</h1>
-    <div class="table">
-        <div class="header">
-            <div>День</div>
-            <div>Час</div>
-            <div>Предмет</div>
-            <div>Викладач</div>
-            <div>Аудиторія</div>
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Розклад уроків для групи {{ group_name }}</h1>
+
+    {% for day, lessons in grouped_lessons.items %}
+        <div class="day-schedule mb-4">
+            <h3 class="text-primary">{{ day }}</h3>
+            {% if lessons %}
+                <ul class="list-group">
+                    {% for lesson in lessons %}
+                        <li class="list-group-item">
+                            <strong>{{ lesson.subject }}</strong> — {{ lesson.time }}<br>
+                            <em>Кабінет: {{ lesson.room }}</em><br>
+                            <small>Викладач: {{ lesson.teacher }}</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted">Немає уроків у цей день.</p>
+            {% endif %}
         </div>
-        {% for lesson in lessons %}
-        <div class="row">
-            <div>{{ lesson.day_of_week }}</div>
-            <div>{{ lesson.time }}</div>
-            <div>{{ lesson.subject }}</div>
-            <div>{{ lesson.teacher }}</div>
-            <div>{{ lesson.room }}</div>
-        </div>
-        {% endfor %}
-    </div>
-    
+    {% endfor %}
 </div>
 {% endblock %}

@@ -17,27 +17,9 @@
     {% block css %}{% endblock %}
 </head>
 <body>
-    <div class="container mt-4">
-        <h1 class="text-center mb-4">Розклад уроків</h1>
 
-        {% for day, lessons in grouped_lessons.items %}
-        <div class="day-schedule">
-            <h3>{{ day }}</h3>
-            <ul class="list-group">
-                {% for lesson in lessons %}
-                <li class="list-group-item">
-                    <strong>{{ lesson.subject }}</strong> — {{ lesson.time }}<br>
-                    <em>{{ lesson.room }}</em><br>
-                    <small>{{ lesson.teacher }}</small>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% empty %}
-        <p>Немає уроків для цього тижня.</p>
-        {% endfor %}
-    </div>
-
+    {% block content %}{% endblock %}
     {% block js %}{% endblock %}
+
 </body>
 </html>

@@ -5,10 +5,12 @@ class LessonSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField()
     room_s = serializers.SerializerMethodField()
     day_of_week = serializers.SerializerMethodField()
+    group_name = serializers.SerializerMethodField()
+
 
     class Meta:
         model = Lesson
-        fields = ("id", "day_of_week", "time", "subject", "room_s", "full_name")
+        fields = ("id", "group_name", "day_of_week", "time", "subject", "room_s", "full_name")
 
     def get_full_name(self, obj):
         if obj.teacher:
@@ -24,3 +26,8 @@ class LessonSerializer(serializers.ModelSerializer):
         if obj.day:
             return obj.day.get_day_of_week_display()
         return ""  #
+
+    def get_group_name(self, obj):
+        if obj.group:
+            return f"{obj.group.group_name}"
+        return ""
